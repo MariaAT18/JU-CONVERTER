@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew assemble'
+                sh './spring-boot-hello-world/gradlew assemble'
             }
         }
         stage('Test') {
             steps {
-                echo './gradlew test'
+                echo './spring-boot-hello-world/gradlew test'
             }
             post {
                 always {
-                    junit 'build/test-results/test/**/*.xml'
-                    archiveArtifacts 'build/reports/test/**/*'
+                    junit 'spring-boot-hello-world/build/test-results/test/**/*.xml'
+                    archiveArtifacts 'spring-boot-hello-world/build/reports/test/**/*'
                 }
             }
         }
