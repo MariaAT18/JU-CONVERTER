@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo './spring-boot-hello-world/gradlew test'
+                sh './spring-boot-hello-world/gradlew test'
             }
             post {
                 always {
