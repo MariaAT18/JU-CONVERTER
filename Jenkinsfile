@@ -4,12 +4,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './spring-boot-hello-world/gradlew assemble'
+                dir("spring-boot-hello-world") {
+                    sh 'gradlew assemble'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh './spring-boot-hello-world/gradlew test'
+                dir("spring-boot-hello-world") {
+                    sh 'gradlew test'
+                }
             }
             post {
                 always {
