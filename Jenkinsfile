@@ -4,17 +4,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                dir("./spring-boot-hello-world") {
                     sh './gradlew assemble'
+                }
             }
         }
         stage('Test') {
             steps {
+                dir("spring-boot-hello-world") {
                     sh './gradlew test'
+                }
             }
             post {
                 always {
-                    junit 'build/test-results/test/**/*.xml'
-                    archiveArtifacts 'build/reports/test/**/*'
+                    junit 'spring-boot-hello-world/build/test-results/test/**/*.xml'
+                    archiveArtifacts 'spring-boot-hello-world/build/reports/test/**/*'
                 }
             }
         }
