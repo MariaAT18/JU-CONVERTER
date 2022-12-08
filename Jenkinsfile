@@ -4,14 +4,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir("spring-boot-hello-world") {
+             sh "pwd"
+                dir("./spring-boot-hello-world") {
+                    sh "pwd"
                     sh 'gradlew assemble'
                 }
             }
         }
         stage('Test') {
             steps {
+             sh "pwd"
                 dir("spring-boot-hello-world") {
+                 sh "pwd"
                     sh 'gradlew test'
                 }
             }
