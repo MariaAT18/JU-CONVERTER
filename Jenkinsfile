@@ -5,7 +5,14 @@ pipeline {
         stage('Build') {
             steps {
                 dir("./spring-boot-hello-world") {
-                    sh './gradlew --stacktrace --scan assemble'
+                    sh './gradlew assemble'
+                }
+            }
+        }
+        stage('SonarQube') {
+            steps {
+                dir("./spring-boot-hello-world") {
+                    sh './gradlew sonarqube'
                 }
             }
         }
