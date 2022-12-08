@@ -12,7 +12,7 @@ sourceCompatibility = "11"
 repositories {
 	mavenCentral()
 	maven {
-		url "https://artifact.aspose.com/repo/"
+		url "https://releases.aspose.com/java/repo/"
 	}
 }
 
@@ -31,7 +31,7 @@ dependencies {
 	implementation group: 'fr.opensagres.xdocreport', name: 'fr.opensagres.poi.xwpf.converter.pdf', version: '2.0.4'
 	implementation group: 'fr.opensagres.xdocreport', name: 'fr.opensagres.poi.xwpf.converter.xhtml', version: '2.0.4'
 	implementation 'net.sourceforge.tess4j:tess4j:5.4.0'
-	implementation group: 'com.aspose', name: 'aspose-words', version: '22.10'
+	implementation group: 'com.aspose', name: 'aspose-words', version: '22.10', classifier: 'jdk17'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
 
