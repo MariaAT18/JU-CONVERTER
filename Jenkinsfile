@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir("./spring-boot-hello-world") {
-                    sh './gradlew assemble'
+                    sh './gradlew --stacktrace --scan assemble'
                 }
             }
         }
