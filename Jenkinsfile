@@ -2,19 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World G1'
-            }
-        }
         stage('Build') {
             steps {
-                echo 'Build G1'
+                sh './gradlew assemble'
             }
         }
-        stage('Build Test 2') {
+        stage('Test') {
             steps {
-                echo 'Build Test 2 G1'
+                echo './gradlew test'
+            }
+            post {
+                always {
+                    junit 'build/test-results/test/**/*.xml'
+                    archiveArtifacts 'build/reports/test/**/*'
+                }
             }
         }
     }
