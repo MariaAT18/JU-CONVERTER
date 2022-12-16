@@ -48,11 +48,11 @@ publishing {
 	repositories {
 		maven {
 			name 'nexus'
-			url "http://localhost:8081/repository/maven-snapshots/"
+			url nexusUrl
 			allowInsecureProtocol true
 			credentials {
-				username "admin"
-				password "admin"
+				username nexusUser
+				password nexusPassword
 			}
 		}
 	}
