@@ -29,5 +29,12 @@ pipeline {
                 }
             }
         }
+        stage('Publish') {
+            steps {
+                dir("./spring-boot-hello-world") {
+                    sh './gradlew publish --console verbose'
+                }
+            }
+        }
     }
 }

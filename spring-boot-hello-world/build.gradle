@@ -4,10 +4,13 @@ plugins {
 	id 'java'
 	id 'jacoco'
 	id "org.sonarqube" version "3.4.0.2513"
+	id "java-library"
+	id "maven-publish"
+	id "application"
 }
 
 group = 'com.codacum'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = "11"
 
 repositories {
@@ -21,11 +24,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/com.alibaba/fastjson
-    implementation 'com.alibaba:fastjson:1.1.15'
+	implementation 'com.alibaba:fastjson:1.1.15'
 
 
-    //implementation 'org.apache.httpcomponents:httpcore:4.4.1'
-    implementation 'org.apache.httpcomponents:httpclient:4.5'
+	//implementation 'org.apache.httpcomponents:httpcore:4.4.1'
+	implementation 'org.apache.httpcomponents:httpclient:4.5'
 
 	implementation group: 'org.springframework', name: 'spring-test', version: '3.1.1.RELEASE'
 	testImplementation 'junit:junit:4.12'
@@ -36,6 +39,24 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
 
+publishing {
+	publications {
+		maven(MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		maven {
+			name 'nexus'
+			url "http://localhost:8081/repository/maven-snapshots/"
+			allowInsecureProtocol true
+			credentials {
+				username "admin"
+				password "admin"
+			}
+		}
+	}
+}
 test {
 	testLogging {
 		events "failed"
