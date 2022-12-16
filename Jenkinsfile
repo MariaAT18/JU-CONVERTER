@@ -9,13 +9,7 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube') {
-            steps {
-                dir("./spring-boot-hello-world") {
-                    sh './gradlew sonarqube'
-                }
-            }
-        }
+        
         stage('Test') {
             when {
                 expression { false }
@@ -32,6 +26,23 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube') {
+            steps {
+                dir("./spring-boot-hello-world") {
+                    withSonarQubeEnv('sonar-jenkins') {
+                        sh './gradlew sonarqube'
+                    }
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 2, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+
         stage('Publish') {
             steps {
                 dir("./spring-boot-hello-world") {
