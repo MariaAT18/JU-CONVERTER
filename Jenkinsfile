@@ -17,6 +17,9 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression { false }
+              }
             steps {
                 dir("spring-boot-hello-world") {
                     sh './gradlew test'
